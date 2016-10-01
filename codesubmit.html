@@ -41,11 +41,19 @@
                     </div>
                 </nav>
                 <div id="mainContent" ng-controller="codeController">
-                    <pre>
-                        <code class="Javascript" ng-repeat="codevalue in codeValue | filter:searchText">
-                            {{codevalue.code}}
-                       </code>
-                    </pre>
+                    <div ng-repeat="codevalue in codeValue | filter:searchText">
+                        <h3>{{codevalue.title}}</h3>
+                        <div>
+                            <h5 class="right-align">{{codevalue.language}}</h5>
+                        </div>
+                        <div class="card-panel">
+                            <pre>
+                                <code class="Javascript">
+                           <h4> {{codevalue.code}}<h4>
+                                 </code>
+                            </pre>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col s4">
@@ -53,7 +61,7 @@
                     <h5 class="center-align">Filter by status</h5>
                     <div class="card-panel">
                         <p ng-repeat="status in allStatus">
-                            <input type="checkbox" id="{{status.name}}" />
+                            <input type="checkbox" id="{{status.name}}" ng-model="status.selected"/>
                             <label for="{{status.name}}">{{status.value}}</label>
                         </p>
                     </div>
@@ -77,13 +85,13 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th data-field="id">Top 2 submission attempted</th>
+                                    <th data-field="id">Top 3 submission attempted</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Knapsack problem</td>
-                                    <td>12,321</td>
+                            <tbody ng-controller="submissionController">
+                                <tr ng-repeat="subValue in submissionValue">
+                                    <td>{{subValue.problem}}</td>
+                                    <td>{{subValue.count}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -93,10 +101,10 @@
                                     <th data-field="id">Number of submission per level</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr ng-repeat="levelInfo in analysisValue">
+                            <tbody ng-controller="levelController">
+                                <tr ng-repeat="levelInfo in levelValues">
                                     <td>{{levelInfo.level}}</td>
-                                    <td>{{levelInfo.rating}}</td>
+                                    <td>{{levelInfo.count}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -108,7 +116,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Easy</td>
+                                    <td>Total Submission</td>
                                     <td>12,321</td>
                                 </tr>
                             </tbody>
@@ -119,13 +127,45 @@
         </div>
 
     </div>
+     <ul class="pagination center-align">
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    <li class="active"><a href="#!">1</a></li>
+    <li class="waves-effect"><a href="#!">2</a></li>
+    <li class="waves-effect"><a href="#!">3</a></li>
+    <li class="waves-effect"><a href="#!">4</a></li>
+    <li class="waves-effect"><a href="#!">5</a></li>
+    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
     </div>
     </div>
+    <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Code Cafe</h5>
+                <p class="grey-text text-lighten-4">A Simplified Code Search.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Github</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="https://github.com/ganny26/CodeCafe">Code Cafe</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2016 Selvaganesh Rajam
+            <a class="grey-text text-lighten-4 right" href="#!">selvaganeshrajam@gmail.com</a>
+            </div>
+          </div>
+        </footer>
+            
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script type="text/javascript" src="js/highlight.pack.js"></script>
+    <script type="text/javascript" src="js/highlight.pack.js"></script>
 
     <script>
    
