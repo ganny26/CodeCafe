@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/dark.css" />
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script src="controller/detailsController.js"></script>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body ng-app="codecafeApp">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Code Cafe - code hub with stats!</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Submitted Code</a></li>
+                <li><a href="#">Analysis</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col s8">
+                <nav style="margin-top:20px;">
+                    <div class="nav-wrapper">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" ng-model="searchText" type="search" placeholder="Search(by title,level or language)" required>
+                                <label for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+                <div id="mainContent" ng-controller="codeController">
+                    <pre>
+                        <code class="Javascript" ng-repeat="codevalue in codeValue | filter:searchText">
+                            {{codevalue.code}}
+                       </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="col s4">
+                <div id="status" ng-controller="statusController">
+                    <h5 class="center-align">Filter by status</h5>
+                    <div class="card-panel">
+                        <p ng-repeat="status in allStatus">
+                            <input type="checkbox" id="{{status.name}}" />
+                            <label for="{{status.name}}">{{status.value}}</label>
+                        </p>
+                    </div>
+                </div>
+                <div id="analysis" ng-controller="analysisController">
+                    <h5 class="center-align">Statical Analysis</h5>
+                    <div class="card-panel">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-field="id">Top 5 languages used</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="codeinfo in analysisValue">
+                                    <td>{{codeinfo.language}}</td>
+                                    <td>{{codeinfo.users_attempted}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-field="id">Top 2 submission attempted</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Knapsack problem</td>
+                                    <td>12,321</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-field="id">Number of submission per level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="levelInfo in analysisValue">
+                                    <td>{{levelInfo.level}}</td>
+                                    <td>{{levelInfo.rating}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-field="id">Total Submission</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Easy</td>
+                                    <td>12,321</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/highlight.pack.js"></script>
+
+    <script>
+   
+        
+    </script>
+</body>
+
+</html>
